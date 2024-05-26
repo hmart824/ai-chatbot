@@ -1,11 +1,9 @@
 import React from "react";
+import parse from 'html-react-parser';
 
 const Response = ({chat}) => {
 
     const lines = chat.assistant.split("```");
-    console.log("lines 1: ", lines[0])
-    console.log("lines 2: ", lines[1])
-    console.log("lines : " , lines)
   return (
     <div className="w-full flex flex-col gap-2">
       <div className="outgoin w-fit max-w-full text-start p-2 self-end bg-[#145DA0] text-sm text-white rounded-md">
@@ -17,9 +15,9 @@ const Response = ({chat}) => {
         ) : (
             lines.map((line , index)=>{
                 if(index === 1){
-                    return <div dangerouslySetInnerHTML={{ __html: line.replace(/^\w+\s*/, '') }} />
+                    return <div key={index}>{parse(line.replace(/^\w+\s*/, ''))}</div>
                 }else if(index === 0){
-                    return line
+                    return <div key={index}>{parse(line)}</div>
                 }else{
                     return null
                 }

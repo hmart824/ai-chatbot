@@ -12,32 +12,7 @@ const openai = new OpenAI({
 
 let assistantPromise, threadPromise, filePromises;
 
-const jsonToCsv = (data) => {
-  const csvRows = [];
-  // Extract headers from the first object
-  const headers = Object.keys(data[0]);
-  csvRows.push(headers.join(','));
 
-  // Extract values from each object and push to csvRows
-  data.forEach(obj => {
-    const values = headers.map(header => {
-      let value = obj[header];
-      // Convert value to string
-      value = String(value);
-      // Escape double quotes in values
-      value = value.replace(/"/g, '""');
-      // If value contains comma, enclose it in double quotes
-      if (value.includes(',')) {
-        value = `"${value}"`;
-      }
-      return value;
-    });
-    csvRows.push(values.join(','));
-  });
-
-  // Join rows with newline character
-  return csvRows.join('\n');
-};
 
 const cancelThreadRun = async (threadId, runId) => {
   try {
@@ -215,29 +190,36 @@ const sendMessageToProSpectorAssistant = async (req, res) => {
             const funcName = action.function.name;
             const functionArguments = JSON.parse(action.function.arguments);
             
-            if (funcName === "getProductDetail") {
+            try{
+              if (funcName === "getProductDetail") {
                 const output = await getProductDetail(functionArguments.pId);
-                console.log('^&^&^&^&^&^&^^&&&^' , output)
                 if(output){
                   toolsOutput.push({
                       tool_call_id: action.id,
                       output: JSON.stringify(output)  
                   });
                 }
+                else{
+                  throw "Internal server Error!!!!!!!!!!!!!"
+                }
             } else if (funcName === "getProducts") {
-              const output = await getProducts();
-              console.log('@@@@@@', output);
-              if (output) {
-                const csv = jsonToCsv(output);
-                console.log("csv generated" , csv)
+                const output = await getProducts();
+              if (output !== undefined) {
                 toolsOutput.push({
                   tool_call_id: action.id,
-                  output: JSON.stringify(csv)
+                  output: JSON.stringify(output)
                 });
                 
+              }else{
+                throw "Internal server Error!!!!!!!!!!!!!"
               }
             } else {
               console.log("Function not found");
+            }
+            }catch (error) {
+              console.error('Error while processing function:', error);
+              await cancelThreadRun(thread.id, run.id);
+              return res.json({ answer: "Assistant: Opps, Something went wrong." });
             }
           }
     
@@ -248,7 +230,7 @@ const sendMessageToProSpectorAssistant = async (req, res) => {
             { tool_outputs: toolsOutput }
         );
       } else if(runStatus.status === "failed"){
-        return res.json({ answer: "Opps, Something went wrong." });
+        return res.json({ answer: "Assistant: Opps, Something went wrong." });
       }
       else {
         console.log("Waiting for the Assistant to process...");
@@ -257,7 +239,7 @@ const sendMessageToProSpectorAssistant = async (req, res) => {
     }
   } catch (error) {
     console.error("Error:", error);
-    res.status(500).json({ error: "An error occurred." });
+    return res.json({ error: "An error occurred." });
   }
 };
 

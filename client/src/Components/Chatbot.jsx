@@ -53,6 +53,7 @@ const Chatbot = () => {
     const response = await axios.post("http://localhost:7070/chat", {
       content: inp,
     });
+    console.log("response ----->>" , response)
     if (response) {
       console.log("^^^^^^^^^^^^^^", response);
       const tempChat = {
@@ -113,6 +114,7 @@ const Chatbot = () => {
               name="content"
               placeholder="Ask me Anything...."
               value={inp}
+              autoFocus
               onChange={(e) => setInp(e.target.value)}
               onKeyDown={(e) => (e.key === "Enter" ? onSubmit() : null)}
             />
