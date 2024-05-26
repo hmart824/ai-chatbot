@@ -1,0 +1,30 @@
+version: '3.9'
+services:
+  server:
+    container_name: ai-chatbot-server
+    build:
+      context: .
+      dockerfile: ./server/Dockerfile
+    restart: always
+    ports:
+      - "7070:7070" # Note the quotes around the port mapping
+    networks:
+      - shared-network
+    volumes:
+      - ./server:/app/
+      - /app/node_modules
+  client:
+    container_name: ai-chatbot-client
+    build:
+      context: .
+      dockerfile: ./client/Dockerfile
+    ports:
+      - "3003:3003"
+    networks:
+      - shared-network
+    volumes:
+      - ./client:/app/
+      - /app/node_modules
+networks:
+  shared-network:
+    driver: bridge

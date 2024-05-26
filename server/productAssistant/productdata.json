@@ -1,0 +1,118 @@
+[
+    {
+        "specs": {
+            "screen_size": "6.2 inches",
+            "camera": "Triple-camera setup (12MP + 64MP + 12MP)",
+            "processor": "Octa-core Exynos 2100",
+            "storage": "256GB internal storage",
+            "battery": "4000mAh"
+        },
+        "_id": "66307b89f9f1512e35406dbc",
+        "name": "Samsung Galaxy S21",
+        "brand": "Samsung",
+        "model": "S21",
+        "price": 799.99,
+        "description": "Experience the power of Samsung Galaxy S21, packed with cutting-edge features.",
+        "delivery": {
+            "return_policy": {
+                "days_allowed": 10,
+                "details": "Item must be returned in original condition with all accessories."
+            },
+            "shipping_method": "Standard",
+            "estimated_delivery": "3-7 business days",
+            "shipping_cost": 12.99,
+            "shipping_countries": [
+                "USA",
+                "Canada",
+                "UK",
+                "Australia",
+                "Germany",
+                "France"
+            ],
+            "_id": "663311d169917c5a9b54078f"
+        }
+    },
+    {
+        "specs": {
+            "sensor_type": "Full-frame CMOS",
+            "resolution": "24.2 megapixels",
+            "focus_type": "Autofocus",
+            "image_stabilization": "5-axis in-body stabilization",
+            "video_resolution": "4K UHD",
+            "memory_card_type": "SD / SDHC / SDXC",
+            "battery": "NP-FZ100 rechargeable battery"
+        },
+        "_id": "66307d0cf9f1512e35406dbd",
+        "name": "Sony Alpha A7 III",
+        "brand": "Sony",
+        "model": "A7 III",
+        "price": 1999.99,
+        "description": "Capture stunning images with the Sony Alpha A7 III camera, featuring advanced technology for professional photographers.",
+        "delivery": {
+            "return_policy": {
+                "days_allowed": 30,
+                "details": "Item must be returned in original condition with all accessories."
+            },
+            "shipping_method": "Standard",
+            "estimated_delivery": "2-5 business days",
+            "shipping_cost": 14.99,
+            "shipping_countries": [
+                "USA",
+                "Canada",
+                "UK",
+                "Australia",
+                "Germany",
+                "France",
+                "Japan"
+            ],
+            "_id": "663311d169917c5a9b540790"
+        }
+    },
+    {
+        "specs": {
+            "display": "AMOLED touchscreen",
+            "battery_life": "Up to 6 days",
+            "sensors": [
+                "Heart rate monitor",
+                "SpO2 sensor",
+                "Accelerometer",
+                "Gyroscope"
+            ],
+            "water_resistance": "Water-resistant up to 50 meters",
+            "connectivity": [
+                "Bluetooth",
+                "Wi-Fi",
+                "GPS"
+            ],
+            "compatible_os": [
+                "iOS",
+                "Android"
+            ]
+        },
+        "_id": "66307dcaf9f1512e35406dbe",
+        "name": "Fitbit Versa 3",
+        "brand": "Fitbit",
+        "model": "Versa 3",
+        "price": 249.99,
+        "description": "Stay connected and track your fitness goals with the Fitbit Versa 3 smartwatch.",
+        "delivery": {
+            "return_policy": {
+                "days_allowed": 30,
+                "details": "Item must be returned in original condition with all accessories."
+            },
+            "shipping_method": "Standard",
+            "estimated_delivery": "1-3 business days",
+            "shipping_cost": 9.99,
+            "shipping_countries": [
+                "USA",
+                "Canada",
+                "UK",
+                "Australia",
+                "Germany",
+                "France",
+                "Japan"
+            ],
+            "_id": "663311d169917c5a9b540791"
+        }
+    }
+]
