@@ -78,7 +78,7 @@ const Chatbot = () => {
     <div className="absolute h-svh top-0 left-0 w-svw flex justify-end items-end flex-col gap-4 ">
       {showChatBox && (
         <div
-          className={`h-[30rem]  w-[20rem] mr-8 bg-white relative rounded-md transition-transform ${
+          className={`h-[85vh]  w-[30vw] mr-8 bg-white relative rounded-md transition-transform ${
             showChatBox ? "translate-x-[0%]" : "translate-x-[111%]"
           } ease-out duration-300`}
         >
@@ -124,7 +124,7 @@ const Chatbot = () => {
         </div>
       )}
       <div
-        className="mb-8 mr-8 text-white p-[.7rem] rounded-full ouline bg-[#145DA0] cursor-pointer"
+        className="mb-[.6rem] mr-8 text-white p-[.7rem] rounded-full ouline bg-[#145DA0] cursor-pointer"
         onClick={() => setShowChatBox(!showChatBox)}
       >
         <TiMessages className="text-3xl" />

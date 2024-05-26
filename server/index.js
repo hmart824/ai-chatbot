@@ -7,6 +7,7 @@ const cors = require('cors');
 dotenv.config();
 const Product = require('./models/ProductModel'); 
 const router = express.Router();
+const {asyncHandler } = require('./utils/asyncHandler');
 
 // Import your assistant function
 // const { sendMessageToWeatherAssistant } = require('./weather_assistant');
@@ -20,35 +21,43 @@ app.use(express.urlencoded({ extended: true }));
 
 app.use(cors());
 app.use(router);
-router.get('/products', async (req, res) => {
-  try {
-    const products = await Product.find();
-    res.json(products);
-  } catch (error) {
-    res.status(500).json({ message: error.message });
-  }
-});
-
-router.get('/products/:productId', async (req, res) => {
-  const productId = req.params.productId;
-
-  // Validate product ID
-  if (!mongoose.Types.ObjectId.isValid(productId)) {
-    return res.status(400).json({ message: 'Invalid product ID' });
-  }
-
-  try {
-    const product = await Product.findById(productId);
-
-    // Check if product exists
-    if (!product) {
-      return res.status(404).json({ message: 'Product not found' });
+router.get('/products', asyncHandler(
+  async (req, res) => {
+    try {
+      const products = await Product.find();
+      res.json(products);
+    } catch (error) {
+      res.status(500).json({ message: error.message });
     }
-
-    res.json(product);
-  } catch (error) {
-    res.status(500).json({ message: error.message });
   }
+));
+
+router.get('/products/:productId', asyncHandler(
+  async (req, res) => {
+    const productId = req.params.productId;
+  
+    // Validate product ID
+    if (!mongoose.Types.ObjectId.isValid(productId)) {
+      return res.status(400).json({ message: 'Invalid product ID' });
+    }
+  
+    try {
+      const product = await Product.findById(productId);
+  
+      // Check if product exists
+      if (!product) {
+        return res.status(404).json({ message: 'Product not found' });
+      }
+  
+      res.json(product);
+    } catch (error) {
+      res.status(500).json({ message: error.message });
+    }
+  }
+));
+app.use((err, req, res, next) => {
+  console.error(err.stack);
+  res.status(500).send('Something went wrong!');
 });
 
 // Connect to MongoDB
